@@ -3,7 +3,6 @@ import DefaultPage from "./Components/DefaultPage";
 import Header from "./Components/Header";
 import SideBarRight from "./Components/SideBarRight";
 import CreateProjects from "./Components/CreateProjects";
-import ProjectsListPage from "./Components/ProjectsListPage";
 import SelectedProject from "./Components/SelectedProject";
 
 function App() {
@@ -14,11 +13,15 @@ function App() {
   });
   console.log(projectState);
 
-  function handleSelectedProject(id) {
+  function handleDeleteProject(id) {
     setProjectState((prevState) => {
+      const updatedProjects = prevState.projects.filter(
+        (project) => project.id !== id
+      );
       return {
         ...prevState,
-        projectStateStatus: id,
+        projects: updatedProjects,
+        projectStateStatus: undefined,
       };
     });
   }
@@ -32,7 +35,16 @@ function App() {
     });
   }
 
-  function handleCancelButton() {
+  function handleOnSaveProjectID(id) {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        projectStateStatus: id,
+      };
+    });
+  }
+
+  function handleProjectToSideBar() {
     setProjectState((prevState) => {
       return {
         ...prevState,
@@ -40,11 +52,12 @@ function App() {
       };
     });
   }
-  function handletoDefault() {
+
+  function handleCancelButton() {
     setProjectState((prevState) => {
       return {
         ...prevState,
-        projectStateStatus: null,
+        projectStateStatus: undefined,
       };
     });
   }
@@ -67,9 +80,9 @@ function App() {
       };
       return {
         ...prevState,
+        projectStateStatus: undefined,
         projects: [...prevState.projects, newProject],
         uniqueId: newId,
-        projectStateStatus: "PROJECTPAGE",
       };
     });
   }
@@ -89,17 +102,12 @@ function App() {
     );
   } else if (projectState.projectStateStatus === undefined) {
     contentRedirect = <DefaultPage onChangeOfPage={handleDefaultPage} />;
-  } else if (projectState.projectStateStatus === "PROJECTPAGE") {
-    contentRedirect = (
-      <ProjectsListPage
-        passProjectDataList={projectState.projects}
-        returnCreatePage={handletoDefault}
-        selectedProject={handleSelectedProject}
-      />
-    );
   } else {
     contentRedirect = (
-      <SelectedProject passSelectedProject={selectedprojected} />
+      <SelectedProject
+        passSelectedProject={selectedprojected}
+        deleteProject={handleDeleteProject}
+      />
     );
   }
 
@@ -110,7 +118,10 @@ function App() {
       </div>
       <div className="h-screen flex gap-8">
         {contentRedirect}
-        <SideBarRight />
+        <SideBarRight
+          sendProjectsToSideBar={projectState.projects}
+          onSaveProjectID={handleOnSaveProjectID}
+        />
       </div>
     </main>
   );

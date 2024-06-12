@@ -1,4 +1,7 @@
-function SelectedProject({ passSelectedProject }) {
+import Tasks from "./Tasks";
+
+function SelectedProject({ passSelectedProject, deleteProject }) {
+  console.log(passSelectedProject, "Priting");
   return (
     <>
       <div className="w-screen h-screen  mt-2 ml-5 mb-14 mr-5  p-3 bg-white border  border-gray-800 rounded-md  shadow-lg mx-2 ">
@@ -7,7 +10,10 @@ function SelectedProject({ passSelectedProject }) {
             <button className="bg-sky-300 text-gray-800 py-2 px-3 text-lg font-semibold rounded-md hover:bg-sky-600 hover:text-gray-950 mt-2  ml-2 mr-4">
               Update
             </button>
-            <button className="bg-sky-300 text-gray-800 py-2 px-3 text-lg font-semibold rounded-md hover:bg-sky-600 hover:text-gray-950 mt-2  ml-2 mr-4">
+            <button
+              onClick={() => deleteProject(passSelectedProject.id)}
+              className="bg-sky-300 text-gray-800 py-2 px-3 text-lg font-semibold rounded-md hover:bg-sky-600 hover:text-gray-950 mt-2  ml-2 mr-4"
+            >
               Delete
             </button>
           </div>
@@ -34,6 +40,10 @@ function SelectedProject({ passSelectedProject }) {
             Requested by: {passSelectedProject.requestedby}
           </p>
         </header>
+        <hr class="my-6 h-px bg-gray-500 border-0"></hr>
+        <div>
+          <Tasks />
+        </div>
       </div>
     </>
   );
