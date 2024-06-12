@@ -3,10 +3,15 @@ function DefaultPage({ onChangeOfPage }) {
     <>
       <div className="mt-48 w-2/3 text-center">
         <h1 className="text-gray-800 py-2 px-1 font-Serif text-3xl">
-          No Projects Selected
+          Start Project
         </h1>
         <p className="text-gray-800 py-2 px-1 font-serif text-lg">
-          Please Select an Project to view details
+          Please click{" "}
+          <span className="text-neutral-950 font-bold  font-mono">
+            {" "}
+            + Add Project button{" "}
+          </span>
+          to create a project for your team
         </p>
         <p>
           <button
