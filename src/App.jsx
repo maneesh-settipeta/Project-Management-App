@@ -44,15 +44,6 @@ function App() {
     });
   }
 
-  function handleProjectToSideBar() {
-    setProjectState((prevState) => {
-      return {
-        ...prevState,
-        projectStateStatus: undefined,
-      };
-    });
-  }
-
   function handleCancelButton() {
     setProjectState((prevState) => {
       return {
@@ -72,6 +63,8 @@ function App() {
   }
 
   function handleSaveData(projectDetails) {
+    console.log(projectDetails, "Printing");
+
     setProjectState((prevState) => {
       const newId = prevState.uniqueId + 1;
       const newProject = {

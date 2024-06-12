@@ -3,6 +3,7 @@ function SideBarRight({ sendProjectsToSideBar, onSaveProjectID }) {
     <>
       <aside className="bg-sky-200 text-gray-900 rounded-l-md py-6 md:w-72 w-1/3 ml-auto">
         <h1 className=" text-gray-800 p-4 font-serif text-2xl">Projects</h1>
+        <hr class="my-6 h-px bg-gray-500 border-0"></hr>
         <div>
           <ul className="flex flex-col ">
             {sendProjectsToSideBar?.map((projects) => (

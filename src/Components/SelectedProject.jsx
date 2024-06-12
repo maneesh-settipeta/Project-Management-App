@@ -7,9 +7,6 @@ function SelectedProject({ passSelectedProject, deleteProject }) {
       <div className="w-screen h-screen  mt-2 ml-5 mb-14 mr-5  p-3 bg-white border  border-gray-800 rounded-md  shadow-lg mx-2 ">
         <header>
           <div className="bg-gray-200 flex justify-end p-2">
-            <button className="bg-sky-300 text-gray-800 py-2 px-3 text-lg font-semibold rounded-md hover:bg-sky-600 hover:text-gray-950 mt-2  ml-2 mr-4">
-              Update
-            </button>
             <button
               onClick={() => deleteProject(passSelectedProject.id)}
               className="bg-sky-300 text-gray-800 py-2 px-3 text-lg font-semibold rounded-md hover:bg-sky-600 hover:text-gray-950 mt-2  ml-2 mr-4"
