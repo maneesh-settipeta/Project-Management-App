@@ -1,7 +1,7 @@
 function DefaultPage({ onChangeOfPage }) {
   return (
     <>
-      <div className="mt-48 w-2/3 text-center">
+      <div className="mt-48 w-screen text-center">
         <h1 className="text-gray-800 py-2 px-1 font-Serif text-3xl">
           Start Project
         </h1>

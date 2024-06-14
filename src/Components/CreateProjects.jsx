@@ -32,7 +32,7 @@ function CreateProjects({ cancelButton, onSendData }) {
   }
 
   return (
-    <div className="w-screen h-screen  mt-2 ml-5 mb-14 mr-5  p-3 bg-white border  border-gray-800 rounded-md  shadow-lg mx-2 ">
+    <div className="w-screen h-screen  mt-2  mb-14    bg-white border  border-gray-800 rounded-md  shadow-lg  ">
       <div className="flex justify-around">
         <div>
           <InputVariables type="text" ref={title} label="Title" />

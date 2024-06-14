@@ -4,7 +4,7 @@ function SelectedProject({ passSelectedProject, deleteProject }) {
   console.log(passSelectedProject, "Priting");
   return (
     <>
-      <div className="w-screen h-screen  mt-2 ml-5 mb-14 mr-5  p-3 bg-white border  border-gray-800 rounded-md  shadow-lg mx-2 ">
+      <div className="w-screen h-screen  mt-2  mb-14   p-3 bg-white border  border-gray-800 rounded-md  shadow-lg ml-2 ">
         <header>
           <div className="bg-gray-200 flex justify-end p-2">
             <button

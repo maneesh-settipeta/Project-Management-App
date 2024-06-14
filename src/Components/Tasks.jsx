@@ -3,6 +3,21 @@ import { useRef, useState } from "react";
 function Tasks() {
   const [inputValue, setInpuValue] = useState("");
   const [arrayOfTasks, setArrayTasks] = useState([]);
+  const [populateInput, setPopulateInput] = useState(null);
+  const [updatedValues, setUpdateNewTask] = useState("");
+
+  function populateInputElement(index, valueUpdated) {
+    setPopulateInput(index);
+    setUpdateNewTask(valueUpdated);
+  }
+
+  function updateInputElement(index) {
+    const newUpdatedValues = [...arrayOfTasks];
+    newUpdatedValues[index] = updatedValues;
+    setArrayTasks(newUpdatedValues);
+    setPopulateInput(null);
+    setUpdateNewTask("");
+  }
 
   function handleCreateTask() {
     setArrayTasks([...arrayOfTasks, inputValue]);
@@ -38,16 +53,43 @@ function Tasks() {
               key={index}
               className="flex justify-between mb-2 p-2 bg-white rounded-md shadow-md border border-black/50 "
             >
-              <p className="text-gray-900 p-1 font-serif font-bold">
-                {createdTask}
-              </p>
-              <button
-                onClick={() => clearTask(index)}
-                className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
-              >
-                {" "}
-                Clear{" "}
-              </button>
+              {populateInput === index ? (
+                <input
+                  value={updatedValues}
+                  className="outline-offset-2 border border-black/50 rounded-md p-1 shadow-md mx-1"
+                  onChange={(e) => setUpdateNewTask(e.target.value)}
+                />
+              ) : (
+                <p className="text-gray-900 p-1 font-serif font-bold">
+                  {createdTask}
+                </p>
+              )}
+
+              <div>
+                {populateInput === index ? (
+                  <button
+                    onClick={() => updateInputElement(index)}
+                    className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => populateInputElement(index, createdTask)}
+                    className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
+                  >
+                    Edit
+                  </button>
+                )}
+
+                <button
+                  onClick={() => clearTask(index)}
+                  className=" text-gray-800  ml-3 text-md font-light rounded-md hover:text-gray-950 "
+                >
+                  {"  "}
+                  Clear{" "}
+                </button>
+              </div>
             </div>
           ))}
         </div>
