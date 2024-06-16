@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-function Tasks() {
+function Tasks({ sendData, passSelectedProject }) {
   const [inputValue, setInpuValue] = useState("");
   const [arrayOfTasks, setArrayTasks] = useState([]);
   const [populateInput, setPopulateInput] = useState(null);
@@ -17,17 +17,22 @@ function Tasks() {
     setArrayTasks(newUpdatedValues);
     setPopulateInput(null);
     setUpdateNewTask("");
+    console.log(newUpdatedValues);
+    sendData(newUpdatedValues);
   }
 
   function handleCreateTask() {
     setArrayTasks([...arrayOfTasks, inputValue]);
     setInpuValue("");
+    sendData([...arrayOfTasks, inputValue]);
   }
 
   function clearTask(index) {
     const newArray = [...arrayOfTasks];
     newArray.splice(index, 1);
     setArrayTasks(newArray);
+    sendData(newArray);
+    console.log(newArray);
   }
 
   return (
@@ -48,50 +53,54 @@ function Tasks() {
           </button>
         </div>
         <div className=" w-1/3 m-1 ">
-          {arrayOfTasks?.map((createdTask, index) => (
-            <div
-              key={index}
-              className="flex justify-between mb-2 p-2 bg-white rounded-md shadow-md border border-black/50 "
-            >
-              {populateInput === index ? (
-                <input
-                  value={updatedValues}
-                  className="outline-offset-2 border border-black/50 rounded-md p-1 shadow-md mx-1"
-                  onChange={(e) => setUpdateNewTask(e.target.value)}
-                />
-              ) : (
-                <p className="text-gray-900 p-1 font-serif font-bold">
-                  {createdTask}
-                </p>
-              )}
-
-              <div>
+          {passSelectedProject?.tasks?.length === 0 ? (
+            <p className="text-sky-700 ml-4">No Tasks Created </p>
+          ) : (
+            passSelectedProject?.tasks?.map((createdTask, index) => (
+              <div
+                key={index}
+                className="flex justify-between mb-2 p-2 bg-white rounded-md shadow-md border border-black/50 "
+              >
                 {populateInput === index ? (
-                  <button
-                    onClick={() => updateInputElement(index)}
-                    className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
-                  >
-                    Save
-                  </button>
+                  <input
+                    value={updatedValues}
+                    className="outline-offset-2 border border-black/50 rounded-md p-1 shadow-md mx-1"
+                    onChange={(e) => setUpdateNewTask(e.target.value)}
+                  />
                 ) : (
-                  <button
-                    onClick={() => populateInputElement(index, createdTask)}
-                    className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
-                  >
-                    Edit
-                  </button>
+                  <p className="text-gray-900 p-1 font-serif font-bold">
+                    {createdTask}
+                  </p>
                 )}
 
-                <button
-                  onClick={() => clearTask(index)}
-                  className=" text-gray-800  ml-3 text-md font-light rounded-md hover:text-gray-950 "
-                >
-                  {"  "}
-                  Clear{" "}
-                </button>
+                <div>
+                  {populateInput === index ? (
+                    <button
+                      onClick={() => updateInputElement(index)}
+                      className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
+                    >
+                      Save
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => populateInputElement(index, createdTask)}
+                      className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
+                    >
+                      Edit
+                    </button>
+                  )}
+
+                  <button
+                    onClick={() => clearTask(index)}
+                    className=" text-gray-800  ml-3 text-md font-light rounded-md hover:text-gray-950 "
+                  >
+                    {"  "}
+                    Clear{" "}
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </>

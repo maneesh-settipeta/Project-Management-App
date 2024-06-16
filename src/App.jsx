@@ -4,6 +4,7 @@ import Header from "./Components/Header";
 import SideBarRight from "./Components/SideBarRight";
 import CreateProjects from "./Components/CreateProjects";
 import SelectedProject from "./Components/SelectedProject";
+import Tasks from "./Components/Tasks";
 
 function App() {
   const [projectState, setProjectState] = useState({
@@ -11,7 +12,6 @@ function App() {
     projects: [],
     uniqueId: 0,
   });
-  console.log(projectState);
 
   function handleDeleteProject(id) {
     setProjectState((prevState) => {
@@ -62,9 +62,40 @@ function App() {
     });
   }
 
-  function handleSaveData(projectDetails) {
-    console.log(projectDetails, "Printing");
+  const handleRedirectCreateProjectFromSide = () => {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        projectStateStatus: null,
+      };
+    });
+  };
 
+  function handleTasksData(projectsTasks) {
+    setProjectState((prevState) => {
+      const projectIndex = prevState.projects.findIndex(
+        (project) => project.id === selectedprojected.id
+      );
+
+      const updatedProject = {
+        ...prevState.projects[projectIndex],
+        tasks: projectsTasks,
+      };
+
+      const finalUpdated = [
+        ...prevState.projects.slice(0, projectIndex),
+        updatedProject,
+        ...prevState.projects.slice(projectIndex + 1),
+      ];
+
+      return {
+        ...prevState,
+        projects: finalUpdated,
+      };
+    });
+  }
+
+  function handleSaveData(projectDetails) {
     setProjectState((prevState) => {
       const newId = prevState.uniqueId + 1;
       const newProject = {
@@ -97,10 +128,13 @@ function App() {
     contentRedirect = <DefaultPage onChangeOfPage={handleDefaultPage} />;
   } else {
     contentRedirect = (
-      <SelectedProject
-        passSelectedProject={selectedprojected}
-        deleteProject={handleDeleteProject}
-      />
+      <>
+        <SelectedProject
+          passSelectedProject={selectedprojected}
+          deleteProject={handleDeleteProject}
+          onSendTasksData={handleTasksData}
+        />
+      </>
     );
   }
 
@@ -114,6 +148,7 @@ function App() {
         <SideBarRight
           sendProjectsToSideBar={projectState.projects}
           onSaveProjectID={handleOnSaveProjectID}
+          redirectCreateProject={handleRedirectCreateProjectFromSide}
         />
       </div>
     </main>

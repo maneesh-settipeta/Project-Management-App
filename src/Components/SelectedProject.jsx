@@ -1,7 +1,15 @@
 import Tasks from "./Tasks";
 
-function SelectedProject({ passSelectedProject, deleteProject }) {
-  console.log(passSelectedProject, "Priting");
+function SelectedProject({
+  passSelectedProject,
+  deleteProject,
+  onSendTasksData,
+}) {
+  function recievedTasks(dataTasks) {
+    onSendTasksData(dataTasks);
+  }
+
+  console.log(passSelectedProject, "MAhesh");
   return (
     <>
       <div className="w-screen h-screen  mt-2  mb-14   p-3 bg-white border  border-gray-800 rounded-md  shadow-lg ml-2 ">
@@ -37,9 +45,12 @@ function SelectedProject({ passSelectedProject, deleteProject }) {
             Requested by: {passSelectedProject.requestedby}
           </p>
         </header>
-        <hr class="my-6 h-px bg-gray-500 border-0"></hr>
+        <hr className="my-6 h-px bg-gray-500 border-0"></hr>
         <div>
-          <Tasks />
+          <Tasks
+            sendData={recievedTasks}
+            passSelectedProject={passSelectedProject}
+          />
         </div>
       </div>
     </>
