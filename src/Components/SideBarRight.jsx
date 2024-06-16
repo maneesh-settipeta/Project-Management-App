@@ -10,7 +10,7 @@ function SideBarRight({
           <h1 className=" text-gray-800 p-4 font-serif text-2xl">Projects</h1>
           <button
             onClick={redirectCreateProject}
-            className="bg-sky-300 text-gray-800 py-2 px-3 text-sm font-semibold rounded-md hover:bg-sky-600 hover:text-gray-950 mt-2 "
+            className="bg-white text-gray-800 py-2 px-3 text-sm font-semibold rounded-md hover:bg-sky-600 hover:text-gray-950 mt-2 "
           >
             + Add Project
           </button>
