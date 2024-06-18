@@ -11,13 +11,13 @@ const Input = forwardRef(function InputVariables(
         {textArea ? (
           <textarea
             ref={ref}
-            className="outline-offset-2 border border-black/50 rounded-md p-2 shadow-xl mx-2"
+            className="outline-offset-2 border border-black/50 rounded-md p-2 shadow-md mx-2"
           />
         ) : (
           <input
             ref={ref}
             type={type}
-            className=" outline-offset-2 border border-black/50 rounded-md p-2 shadow-md mx-2"
+            className=" outline-offset-2 border border-black/50 rounded-md p-2 shadow-md mx-1"
           />
         )}
       </p>

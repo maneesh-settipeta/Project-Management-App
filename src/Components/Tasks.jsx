@@ -38,7 +38,7 @@ function Tasks({ sendData, passSelectedProject }) {
   return (
     <>
       <div>
-        <div className="m-3">
+        <div className="w-full flex justify-center pt-6 pb-7">
           <input
             value={inputValue}
             onChange={(valuee) => setInpuValue(valuee.target.value)}
@@ -47,19 +47,19 @@ function Tasks({ sendData, passSelectedProject }) {
           />
           <button
             onClick={handleCreateTask}
-            className="bg-sky-300 text-gray-800 py-2 px-3 text-lg font-semibold rounded-md hover:bg-sky-600 hover:text-gray-950 mt-2 ml-4"
+            className="bg-[rgb(64,224,208)] text-gray-950 py-2 px-2 text-md font-normal rounded-md mt-2  ml-2 mr-4"
           >
             Create Task
           </button>
         </div>
-        <div className=" w-1/3 m-1 ">
+        <div className=" ">
           {passSelectedProject?.tasks?.length === 0 ? (
-            <p className="text-sky-700 ml-4">No Tasks Created </p>
+            <p className="text-sky-700  mt-1 ml-2">No Tasks Created </p>
           ) : (
             passSelectedProject?.tasks?.map((createdTask, index) => (
               <div
                 key={index}
-                className="flex justify-between mb-2 p-2 bg-white rounded-md shadow-md border border-black/50 "
+                className="flex justify-between m-2 p-2 w-80 mr-3 rounded-md  border border-black/50 "
               >
                 {populateInput === index ? (
                   <input

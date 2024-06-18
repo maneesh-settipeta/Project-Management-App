@@ -140,10 +140,10 @@ function App() {
 
   return (
     <main>
-      <div className="bg-white pt-2 pb-2">
+      <div>
         <Header returnHomePage={handleReturnHomePage} />
       </div>
-      <div className="h-screen flex gap-8">
+      <div className="h-screen flex gap-0">
         {contentRedirect}
         <SideBarRight
           sendProjectsToSideBar={projectState.projects}

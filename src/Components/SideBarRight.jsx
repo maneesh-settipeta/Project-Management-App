@@ -5,12 +5,12 @@ function SideBarRight({
 }) {
   return (
     <>
-      <aside className="bg-sky-200 text-gray-900 rounded-l-md py-6 md:w-72 w-1/3 ml-auto">
+      <aside className="bg-[rgb(64,224,208)] text-gray-900  py-4 w-1/6 border border-l-slate-400">
         <div className="flex">
           <h1 className=" text-gray-800 p-4 font-serif text-2xl">Projects</h1>
           <button
             onClick={redirectCreateProject}
-            className="bg-white text-gray-800 py-2 px-3 text-sm font-semibold rounded-md hover:bg-sky-600 hover:text-gray-950 mt-2 "
+            className=" text-gray-800 py-2 px-3 text-sm font-semibold rounded-md hover:text-gray-950 mt- "
           >
             + Add Project
           </button>
@@ -22,7 +22,7 @@ function SideBarRight({
               <p key={projects.id}>
                 <button
                   onClick={() => onSaveProjectID(projects.id)}
-                  className="bg-sky-500 text-gray-800  p-3 m-1 ml-2 rounded-md"
+                  className="bg-gray-200 text-gray-800  text-md p-1  ml-1  mb-1 w-56 text-start"
                 >
                   {projects.title}
                 </button>
