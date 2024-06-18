@@ -22,31 +22,31 @@ function SelectedProject({
         </div>
         <hr className="mt-2"></hr>
 
-        <div className=" flex justify-between pl-7 pr-7 pt-4 pb-6">
-          <div>
-            <h1 className="text-gray-800 py-2 px-1 font-bold text-4xl">
+        <div className=" flex justify-between mt-4 mb-4 ">
+          <div className="ml-3 w-1/2">
+            <h1 className="text-gray-800 py-2 px-1 font-semibold text-2xl">
               Title: {passSelectedProject.title}
             </h1>
 
-            <p className="text-gray-800 py-2 px-1 font-Serif text-lg">
+            <p className="text-gray-800 py-2 px-1 font-semibold text-1xl">
               {" "}
               DueDate: {passSelectedProject.dueDate}
             </p>
-            <p className="text-gray-800 py-2 px-1 font-Serif text-lg">
-              Description: {passSelectedProject.description}
+            <p className="text-gray-800 py-2 px-1 font-semibold text-1xl">
+              Requested by: {passSelectedProject.requestedby}
             </p>
           </div>
 
-          <div>
-            <h1 className="text-gray-800 py-2 px-1 font-bold text-2xl">
+          <div className="w-1/2">
+            <h1 className="text-gray-800 py-2 px-1 font-semibold text-2xl">
               Assigned to: {passSelectedProject.assignedto}
             </h1>
-            <p className="text-gray-800 py-2 px-1 font-Serif text-lg">
+            <p className="text-gray-800 py-2 px-1 font-semibold text-1xl">
               {" "}
               Priority: {passSelectedProject.priority}
             </p>
-            <p className="text-gray-800 py-2 px-1 font-Serif text-lg">
-              Requested by: {passSelectedProject.requestedby}
+            <p className="text-gray-800 py-2 px-1 font-semibold text-1xl">
+              Description: {passSelectedProject.description}
             </p>
           </div>
         </div>

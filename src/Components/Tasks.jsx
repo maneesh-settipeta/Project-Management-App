@@ -38,7 +38,7 @@ function Tasks({ sendData, passSelectedProject }) {
   return (
     <>
       <div>
-        <div className="w-full flex justify-center pt-6 pb-7">
+        <div className="w-full flex justify-center pt-6">
           <input
             value={inputValue}
             onChange={(valuee) => setInpuValue(valuee.target.value)}
@@ -52,9 +52,11 @@ function Tasks({ sendData, passSelectedProject }) {
             Create Task
           </button>
         </div>
-        <div className=" ">
+        <div className="ml-6">
           {passSelectedProject?.tasks?.length === 0 ? (
-            <p className="text-sky-700  mt-1 ml-2">No Tasks Created </p>
+            <p className="text-sky-700  text-center mt-4 mr-5">
+              No Tasks Created{" "}
+            </p>
           ) : (
             passSelectedProject?.tasks?.map((createdTask, index) => (
               <div

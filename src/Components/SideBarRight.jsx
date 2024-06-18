@@ -22,7 +22,7 @@ function SideBarRight({
               <p key={projects.id}>
                 <button
                   onClick={() => onSaveProjectID(projects.id)}
-                  className="bg-gray-200 text-gray-800  text-md p-1  ml-1  mb-1 w-56 text-start"
+                  className="bg-gray-200 text-gray-800  text-md p-1  ml-1 rounded-md mb-1 w-56 text-start"
                 >
                   {projects.title}
                 </button>
