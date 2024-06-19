@@ -17,7 +17,7 @@ function SelectedProject({
             onClick={() => deleteProject(passSelectedProject.id)}
             className="bg-sky-400 text-gray-950 py-2 px-2 text-md font-normal rounded-md mt-2  ml-2 mr-4"
           >
-            Delete Record
+            Delete Project
           </button>
         </div>
         <hr className="mt-2"></hr>
