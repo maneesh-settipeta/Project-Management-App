@@ -52,7 +52,7 @@ function Tasks({ sendData, passSelectedProject }) {
             Create Task
           </button>
         </div>
-        <div className="ml-6">
+        <div className="max-h-96 overflow-y-auto ml-6">
           {passSelectedProject?.tasks?.length === 0 ? (
             <p className="text-sky-700  text-center mt-4 mr-5">
               No Tasks Created{" "}

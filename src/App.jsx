@@ -5,13 +5,29 @@ import SideBarRight from "./Components/SideBarRight";
 import CreateProjects from "./Components/CreateProjects";
 import SelectedProject from "./Components/SelectedProject";
 import Tasks from "./Components/Tasks";
+import LoginPage from "./Components/LoginPage";
 
 function App() {
   const [projectState, setProjectState] = useState({
     projectStateStatus: undefined,
     projects: [],
     uniqueId: 0,
+    isUserLoggedIn: false,
   });
+
+  function handleUserLoginPage(userName, userPassword) {
+    setProjectState((prevState) => {
+      let UserLoggedIn = false;
+      if (userName === "user" && userPassword === "12345") {
+        UserLoggedIn = true;
+      }
+
+      return {
+        ...prevState,
+        isUserLoggedIn: UserLoggedIn,
+      };
+    });
+  }
 
   function handleDeleteProject(id) {
     setProjectState((prevState) => {
@@ -139,18 +155,24 @@ function App() {
   }
 
   return (
-    <main>
-      <div>
-        <Header returnHomePage={handleReturnHomePage} />
-      </div>
-      <div className="h-screen flex gap-0">
-        {contentRedirect}
-        <SideBarRight
-          sendProjectsToSideBar={projectState.projects}
-          onSaveProjectID={handleOnSaveProjectID}
-          redirectCreateProject={handleRedirectCreateProjectFromSide}
-        />
-      </div>
+    <main className="h-screen flex flex-col">
+      {projectState.isUserLoggedIn ? (
+        <>
+          <div>
+            <Header returnHomePage={handleReturnHomePage} />
+          </div>
+          <div className="flex flex-grow">
+            {contentRedirect}
+            <SideBarRight
+              sendProjectsToSideBar={projectState.projects}
+              onSaveProjectID={handleOnSaveProjectID}
+              redirectCreateProject={handleRedirectCreateProjectFromSide}
+            />
+          </div>
+        </>
+      ) : (
+        <LoginPage onSendUserData={handleUserLoginPage} />
+      )}
     </main>
   );
 }
