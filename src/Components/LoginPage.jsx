@@ -20,7 +20,7 @@ function LoginPage({ onSendUserData }) {
         <div className="bg-sky-300 p-7 rounded-md ">
           <div>
             <p className="flex flex-col py-2">
-              <label className="text-2xl font-medium "> UserId</label>
+              <label className="text-1xl font-medium "> UserId</label>
               <input
                 className="max-w-fit p-3 border   border-none outline-none rounded-md"
                 ref={userId}
@@ -30,7 +30,7 @@ function LoginPage({ onSendUserData }) {
           </div>
           <div>
             <p className="flex flex-col py-3 ">
-              <label className="text-2xl font-medium ">Password</label>
+              <label className="text-1xl font-medium ">Password</label>
               <input
                 className="max-w-fit p-3 border  border-none outline-none rounded-md"
                 ref={userPassword}
