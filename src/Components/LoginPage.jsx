@@ -7,6 +7,9 @@ function LoginPage({ onSendUserData }) {
   function handleUserLogin() {
     const username = userId.current.value;
     const userPass = userPassword.current.value;
+    if (username === "" && userPass === "") {
+      alert("Please Enter Login Credentials");
+    }
 
     onSendUserData(username, userPass);
   }
