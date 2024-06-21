@@ -1,3 +1,6 @@
+import { CreateContext } from "../Store/Store-Projects-Data";
+import { useContext } from "react";
+
 function SideBarRight({
   sendProjectsToSideBar,
   onSaveProjectID,
@@ -16,20 +19,19 @@ function SideBarRight({
           </button>
         </div>
         <hr className="my-6 h-px bg-gray-500 border-0"></hr>
-        <div>
-          <ul className="flex flex-col ">
-            {sendProjectsToSideBar?.map((projects) => (
-              <p key={projects.id}>
-                <button
-                  onClick={() => onSaveProjectID(projects.id)}
-                  className="bg-gray-200 text-gray-800  text-md p-1  ml-1 rounded-md mb-1 w-56 text-start"
-                >
-                  {projects.title}
-                </button>
-              </p>
-            ))}
-          </ul>
-        </div>
+
+        <ul className="flex flex-col ">
+          {sendProjectsToSideBar?.map((projects) => (
+            <p key={projects.id}>
+              <button
+                onClick={() => onSaveProjectID(projects.id)}
+                className="bg-gray-200 text-gray-800  text-md p-1  ml-1 rounded-md mb-1 w-56 text-start"
+              >
+                {projects.title}
+              </button>
+            </p>
+          ))}
+        </ul>
       </aside>
     </>
   );

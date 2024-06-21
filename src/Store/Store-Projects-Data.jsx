@@ -1,6 +1,7 @@
 import { createContext } from "react";
 export const CreateContext = createContext({
   projects: [],
-  tasks: [],
+  projectStateStatus: 1,
+  tasksItems: [],
 });
-console.log(CreateContext.projects, "Store");
+console.log(CreateContext.tasksItems, "StoreComp");

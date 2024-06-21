@@ -7,6 +7,7 @@ import SelectedProject from "./Components/SelectedProject";
 import Tasks from "./Components/Tasks";
 import LoginPage from "./Components/LoginPage";
 import { CreateContext } from "./Store/Store-Projects-Data";
+import { useContext } from "react";
 
 function App() {
   const [projectState, setProjectState] = useState({
@@ -15,6 +16,9 @@ function App() {
     uniqueId: 0,
     isUserLoggedIn: false,
   });
+
+  const { tasksItems } = useContext(CreateContext);
+  console.log(tasksItems, "TaskItemsInApp.JSX");
 
   function handleUserLoginPage(userName, userPassword) {
     setProjectState((prevState) => {
@@ -88,7 +92,8 @@ function App() {
     });
   };
 
-  function handleTasksData(projectsTasks) {
+  function handleTasksData(tasksItems) {
+    console.log(tasksItems, "AppRecieving");
     setProjectState((prevState) => {
       const projectIndex = prevState.projects.findIndex(
         (project) => project.id === selectedprojected.id
@@ -96,7 +101,7 @@ function App() {
 
       const updatedProject = {
         ...prevState.projects[projectIndex],
-        tasks: projectsTasks,
+        tasks: tasksItems,
       };
 
       const finalUpdated = [
@@ -156,8 +161,9 @@ function App() {
   }
   const projectsData = {
     projects: projectState.projects,
+    projectStateStatus: projectState.projectStateStatus,
   };
-  console.log(projectsData.projects, "App.jsx");
+  console.log(projectsData, "App.jsx");
 
   return (
     <CreateContext.Provider value={projectsData}>
