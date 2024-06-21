@@ -7,7 +7,12 @@ function Tasks({ sendData }) {
   const [populateInput, setPopulateInput] = useState(null);
   const [updatedValues, setUpdateNewTask] = useState("");
 
-  const { tasksItems } = useContext(CreateContext);
+  const { projects, projectStateStatus } = useContext(CreateContext);
+
+  const selectedTasks = projects.find(
+    (project) => project.id === projectStateStatus
+  );
+  console.log(selectedTasks, "getting");
 
   // console.log(passSelectedProject, "PassSelectedProject");
 
@@ -23,7 +28,7 @@ function Tasks({ sendData }) {
     setPopulateInput(null);
     setUpdateNewTask("");
     console.log(newUpdatedValues);
-    // sendData(newUpdatedValues);
+    sendData(newUpdatedValues);
   }
   let newTasks;
 
@@ -41,85 +46,80 @@ function Tasks({ sendData }) {
     const newArray = [...arrayOfTasks];
     newArray.splice(index, 1);
     setArrayTasks(newArray);
-    // sendData(newArray);
+    sendData(newArray);
     console.log(newArray);
   }
-  let tasksContext = {
-    tasksItems: arrayOfTasks,
-  };
-  console.log(tasksItems, "TasksItems");
+  console.log(projects);
 
   return (
-    <CreateContext.Provider value={tasksContext}>
-      <div>
-        <div className="w-full flex justify-center pt-6">
-          <input
-            value={inputValue}
-            onChange={(valuee) => setInpuValue(valuee.target.value)}
-            type="text"
-            className=" outline-offset-2 border border-black/50 rounded-md p-2 shadow-md mx-2"
-          />
-          <button
-            onClick={handleCreateTask}
-            className="bg-[rgb(64,224,208)] text-gray-950 py-2 px-2 text-md font-normal rounded-md mt-2  ml-2 mr-4"
-          >
-            Create Task
-          </button>
-        </div>
-        <div className="max-h-96 overflow-y-auto ml-6">
-          {tasksItems?.length === 0 ? (
-            <p className="text-sky-700  text-center mt-4 mr-5">
-              No Tasks Created{" "}
-            </p>
-          ) : (
-            tasksItems?.map((createdTask, index) => (
-              <div
-                key={index}
-                className="flex justify-between m-2 p-2 w-80 mr-3 rounded-md  border border-black/50 "
-              >
+    <div>
+      <div className="w-full flex justify-center pt-6">
+        <input
+          value={inputValue}
+          onChange={(valuee) => setInpuValue(valuee.target.value)}
+          type="text"
+          className=" outline-offset-2 border border-black/50 rounded-md p-2 shadow-md mx-2"
+        />
+        <button
+          onClick={handleCreateTask}
+          className="bg-[rgb(64,224,208)] text-gray-950 py-2 px-2 text-md font-normal rounded-md mt-2  ml-2 mr-4"
+        >
+          Create Task
+        </button>
+      </div>
+      <div className="max-h-96 overflow-y-auto ml-6">
+        {selectedTasks?.tasks?.length === 0 ? (
+          <p className="text-sky-700  text-center mt-4 mr-5">
+            No Tasks Created{" "}
+          </p>
+        ) : (
+          selectedTasks?.tasks?.map((createdTask, index) => (
+            <div
+              key={index}
+              className="flex justify-between m-2 p-2 w-80 mr-3 rounded-md  border border-black/50 "
+            >
+              {populateInput === index ? (
+                <input
+                  value={updatedValues}
+                  className="outline-offset-2 border border-black/50 rounded-md p-1 shadow-md mx-1"
+                  onChange={(e) => setUpdateNewTask(e.target.value)}
+                />
+              ) : (
+                <p className="text-gray-900 p-1 font-serif font-bold">
+                  {createdTask}
+                </p>
+              )}
+
+              <div>
                 {populateInput === index ? (
-                  <input
-                    value={updatedValues}
-                    className="outline-offset-2 border border-black/50 rounded-md p-1 shadow-md mx-1"
-                    onChange={(e) => setUpdateNewTask(e.target.value)}
-                  />
+                  <button
+                    onClick={() => updateInputElement(index)}
+                    className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
+                  >
+                    Save
+                  </button>
                 ) : (
-                  <p className="text-gray-900 p-1 font-serif font-bold">
-                    {createdTask}
-                  </p>
+                  <button
+                    onClick={() => populateInputElement(index, createdTask)}
+                    className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
+                  >
+                    Edit
+                  </button>
                 )}
 
-                <div>
-                  {populateInput === index ? (
-                    <button
-                      onClick={() => updateInputElement(index)}
-                      className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
-                    >
-                      Save
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => populateInputElement(index, createdTask)}
-                      className=" text-gray-800   text-md font-light rounded-md hover:text-gray-950 "
-                    >
-                      Edit
-                    </button>
-                  )}
-
-                  <button
-                    onClick={() => clearTask(index)}
-                    className=" text-gray-800  ml-3 text-md font-light rounded-md hover:text-gray-950 "
-                  >
-                    {"  "}
-                    Clear{" "}
-                  </button>
-                </div>
+                <button
+                  onClick={() => clearTask(index)}
+                  className=" text-gray-800  ml-3 text-md font-light rounded-md hover:text-gray-950 "
+                >
+                  {"  "}
+                  Clear{" "}
+                </button>
               </div>
-            ))
-          )}
-        </div>
+            </div>
+          ))
+        )}
       </div>
-    </CreateContext.Provider>
+    </div>
   );
 }
 export default Tasks;

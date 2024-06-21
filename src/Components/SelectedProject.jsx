@@ -3,8 +3,8 @@ import { CreateContext } from "../Store/Store-Projects-Data";
 import { useContext } from "react";
 
 function SelectedProject({ deleteProject, onSendTasksData }) {
-  function handleDataFromTasks() {
-    onSendTasksData();
+  function handleDataFromTasks(tasksData) {
+    onSendTasksData(tasksData);
   }
   const { projectStateStatus, projects } = useContext(CreateContext);
 
@@ -58,7 +58,7 @@ function SelectedProject({ deleteProject, onSendTasksData }) {
 
         <hr></hr>
         <div>
-          <Tasks sendData={(tasks) => onSendTasksData(tasks)} />
+          <Tasks sendData={handleDataFromTasks} />
         </div>
       </div>
     </>
