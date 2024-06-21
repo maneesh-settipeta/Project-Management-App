@@ -17,7 +17,7 @@ function LoginPage({ onSendUserData }) {
   return (
     <>
       <div className="bg-slate-200 h-screen flex items-center justify-center">
-        <div className="bg-sky-300 p-7 rounded-md ">
+        <div className="bg-[#7FB5FF] p-7 rounded-md ">
           <div>
             <p className="flex flex-col py-2">
               <label className="text-1xl font-medium "> UserId</label>

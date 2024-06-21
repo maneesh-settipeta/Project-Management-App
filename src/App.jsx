@@ -6,6 +6,7 @@ import CreateProjects from "./Components/CreateProjects";
 import SelectedProject from "./Components/SelectedProject";
 import Tasks from "./Components/Tasks";
 import LoginPage from "./Components/LoginPage";
+import { CreateContext } from "./Store/Store-Projects-Data";
 
 function App() {
   const [projectState, setProjectState] = useState({
@@ -146,34 +147,41 @@ function App() {
     contentRedirect = (
       <>
         <SelectedProject
-          passSelectedProject={selectedprojected}
+          // passSelectedProject={selectedprojected}
           deleteProject={handleDeleteProject}
           onSendTasksData={handleTasksData}
         />
       </>
     );
   }
+  const projectsData = {
+    projects: projectState.projects,
+  };
+  console.log(projectsData.projects, "App.jsx");
 
   return (
-    <main className="h-screen flex flex-col">
-      {projectState.isUserLoggedIn ? (
-        <>
-          <div>
-            <Header returnHomePage={handleReturnHomePage} />
-          </div>
-          <div className="flex flex-grow">
-            {contentRedirect}
-            <SideBarRight
-              sendProjectsToSideBar={projectState.projects}
-              onSaveProjectID={handleOnSaveProjectID}
-              redirectCreateProject={handleRedirectCreateProjectFromSide}
-            />
-          </div>
-        </>
-      ) : (
-        <LoginPage onSendUserData={handleUserLoginPage} />
-      )}
-    </main>
+    <CreateContext.Provider value={projectsData}>
+      {" "}
+      <main className="h-screen flex flex-col">
+        {projectState.isUserLoggedIn ? (
+          <>
+            <div>
+              <Header returnHomePage={handleReturnHomePage} />
+            </div>
+            <div className="flex flex-grow">
+              {contentRedirect}
+              <SideBarRight
+                sendProjectsToSideBar={projectState.projects}
+                onSaveProjectID={handleOnSaveProjectID}
+                redirectCreateProject={handleRedirectCreateProjectFromSide}
+              />
+            </div>
+          </>
+        ) : (
+          <LoginPage onSendUserData={handleUserLoginPage} />
+        )}
+      </main>
+    </CreateContext.Provider>
   );
 }
 
