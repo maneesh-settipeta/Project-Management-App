@@ -1,8 +1,11 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import InputVariables from "./InputsVariables";
 import Input from "./InputsVariables";
+import { CreateContext } from "../Store/Store-Projects-Data";
 
 function CreateProjects({ cancelButton, onSendData }) {
+  const { handleSaveData } = useContext(CreateContext);
+
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
@@ -62,7 +65,7 @@ function CreateProjects({ cancelButton, onSendData }) {
           Cancel
         </button>
         <button
-          onClick={onSaveButton}
+          onClick={handleSaveData}
           className="bg-[rgb(64,224,208)] text-gray-350 py-2 px-3 text-lg hover:font-medium rounded-md mt-2 ml-2 mr-12 hover:bg-[rgb(72,209,204)] hover:text-black hover:shadow-[0_4px_10px_rgba(0,0,0,0.25)] transition-all duration-300 ease-in-out"
         >
           Save

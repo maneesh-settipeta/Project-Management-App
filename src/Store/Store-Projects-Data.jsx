@@ -3,19 +3,24 @@ import { createContext } from "react";
 export const CreateContext = createContext({
   projects: [],
   projectStateStatus: 1,
+  handleUserLoginPage: () => {},
+  handleDeleteProject: () => {},
+  handleReturnHomePage: () => {},
+  handleOnSaveProjectID: () => {},
+  handleCancelButton: () => {},
+  handleDefaultPage: () => {},
+  handleRedirectCreateProjectFromSide: () => {},
+  handleTasksData: () => {},
+  handleSaveData: () => {},
 });
 
-export default ProjectContext({ children });
-{
+export default function ProjectContext({ children }) {
   const [projectState, setProjectState] = useState({
     projectStateStatus: undefined,
     projects: [],
     uniqueId: 0,
     isUserLoggedIn: false,
   });
-
-  const { tasksItems } = useContext(CreateContext);
-  console.log(tasksItems, "TaskItemsInApp.JSX");
 
   function handleUserLoginPage(userName, userPassword) {
     setProjectState((prevState) => {
@@ -134,31 +139,17 @@ export default ProjectContext({ children });
     (project) => project.id === projectState.projectStateStatus
   );
 
-  let contentRedirect;
-
-  if (projectState.projectStateStatus === null) {
-    contentRedirect = (
-      <CreateProjects
-        cancelButton={handleCancelButton}
-        onSendData={handleSaveData}
-      />
-    );
-  } else if (projectState.projectStateStatus === undefined) {
-    contentRedirect = <DefaultPage onChangeOfPage={handleDefaultPage} />;
-  } else {
-    contentRedirect = (
-      <>
-        <SelectedProject
-          // passSelectedProject={selectedprojected}
-          deleteProject={handleDeleteProject}
-          onSendTasksData={handleTasksData}
-        />
-      </>
-    );
-  }
   const projectsData = {
-    projects: projectState.projects,
-    projectStateStatus: projectState.projectStateStatus,
+    ...projectState,
+    handleUserLoginPage,
+    handleDeleteProject,
+    handleReturnHomePage,
+    handleOnSaveProjectID,
+    handleCancelButton,
+    updateHandleDefaultPage: handleDefaultPage,
+    handleRedirectCreateProjectFromSide,
+    handleTasksData,
+    handleSaveData,
   };
   // console.log(projectsData, "App.jsx");
 
