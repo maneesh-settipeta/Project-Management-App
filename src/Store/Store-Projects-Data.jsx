@@ -56,6 +56,7 @@ export default function ProjectContext({ children }) {
         projectStateStatus: undefined,
       };
     });
+    console.log("projects ",projectState);
   }
 
   function handleOnSaveProjectID(id) {
@@ -80,9 +81,10 @@ export default function ProjectContext({ children }) {
     setProjectState((prevState) => {
       return {
         ...prevState,
-        projectStateStatus: null,
+        projectStateStatus: undefined,
       };
     });
+    console.log("insd",projectState);
   }
 
   const handleRedirectCreateProjectFromSide = () => {

@@ -1,6 +1,5 @@
 import { useContext, useRef } from "react";
 import InputVariables from "./InputsVariables";
-import Input from "./InputsVariables";
 import { CreateContext } from "../Store/Store-Projects-Data";
 
 function CreateProjects({ cancelButton, onSendData }) {

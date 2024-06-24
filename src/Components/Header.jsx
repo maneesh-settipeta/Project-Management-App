@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { CreateContext } from "../Store/Store-Projects-Data";
 
-function Header({ returnHomePage }) {
-  const { updateHandleDefaultPage } = useContext(CreateContext);
+function Header() {
+  // console.log();
+  const { updateHandleDefaultPage,projects ,projectStateStatus} = useContext(CreateContext);
+  console.log(projects,projectStateStatus);
   return (
     <div>
       <div className="border-b border-b-slate-400 py-2 ">
