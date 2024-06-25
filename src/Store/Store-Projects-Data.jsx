@@ -35,19 +35,21 @@ export default function ProjectContext({ children }) {
   function updateProjectState(status, id = null) {
     console.log(status, id, "coming");
     setProjectState((prevState) => {
-      let updatedProjects = prevState.projects;
-      if (status === "delete" && id) {
-        console.log(status, id, "if loop");
-        updatedProjects = updatedProjects.filter(
+      if (status == "delete" && id) {
+        const updatedProjects = prevState.projects.filter(
           (project) => project.id !== id
         );
-        status = undefined;
+        return {
+          ...prevState,
+          projects: updatedProjects,
+          projectStateStatus: undefined,
+        };
+      } else {
+        return {
+          ...prevState,
+          projectStateStatus: status,
+        };
       }
-      return {
-        ...prevState,
-        projects: updatedProjects,
-        projectStateStatus: status,
-      };
     });
   }
 

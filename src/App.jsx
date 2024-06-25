@@ -16,19 +16,19 @@ function App() {
   return (
     <ProjectContext>
       <main className="h-screen flex flex-col">
-        {isUserLoggedIn ? (
-          <>
-            <div>
-              <Header />
-            </div>
-            <div className="flex flex-grow">
-              <Home />
-              <SideBarRight />
-            </div>
-          </>
-        ) : (
-          <LoginPage />
-        )}
+        {/* {isUserLoggedIn ? ( */}
+        <>
+          <div>
+            <Header />
+          </div>
+          <div className="flex flex-grow">
+            <Home />
+            <SideBarRight />
+          </div>
+        </>
+        {/* // ) : (
+        //   <LoginPage />
+        // )} */}
       </main>
     </ProjectContext>
   );
