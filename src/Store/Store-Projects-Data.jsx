@@ -23,12 +23,11 @@ export default function ProjectContext({ children }) {
       let UserLoggedIn = false;
       if (userName === "user" && userPassword === "12345") {
         UserLoggedIn = true;
+        return {
+          ...prevState,
+          isUserLoggedIn: UserLoggedIn,
+        };
       }
-
-      return {
-        ...prevState,
-        isUserLoggedIn: UserLoggedIn,
-      };
     });
   }
 
@@ -54,22 +53,30 @@ export default function ProjectContext({ children }) {
   }
 
   function handleTasksData(tasksItems) {
-    console.log(tasksItems, "AppRecieving");
+    console.log(tasksItems, "TasksRecieving");
     setProjectState((prevState) => {
-      const projectIndex = prevState.projects.findIndex(
-        (project) => project.id === selectedprojected.id
+      const selectProject = prevState.projects.find(
+        (project) => project.id === prevState.projectStateStatus
       );
+      console.log(selectedprojected, "-", prevState.projectStateStatus);
+
+      const projectIndex = prevState.projects.findIndex(
+        (project) => project.id === selectProject.id
+      );
+      console.log(projectIndex);
 
       const updatedProject = {
         ...prevState.projects[projectIndex],
         tasks: tasksItems,
       };
+      console.log(updatedProject, "Updated");
 
       const finalUpdated = [
         ...prevState.projects.slice(0, projectIndex),
         updatedProject,
         ...prevState.projects.slice(projectIndex + 1),
       ];
+      console.log(finalUpdated, "final");
 
       return {
         ...prevState,
@@ -97,6 +104,7 @@ export default function ProjectContext({ children }) {
   const selectedprojected = projectState.projects.find(
     (project) => project.id === projectState.projectStateStatus
   );
+  console.log(selectedprojected, "not updated");
 
   const projectsData = {
     ...projectState,

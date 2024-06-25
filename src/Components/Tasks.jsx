@@ -15,8 +15,6 @@ function Tasks({ sendData }) {
   );
   console.log(selectedTasks, "getting");
 
-  // console.log(passSelectedProject, "PassSelectedProject");
-
   function populateInputElement(index, valueUpdated) {
     setPopulateInput(index);
     setUpdateNewTask(valueUpdated);
@@ -28,12 +26,12 @@ function Tasks({ sendData }) {
     setArrayTasks(newUpdatedValues);
     setPopulateInput(null);
     setUpdateNewTask("");
-    console.log(newUpdatedValues);
+    // console.log(newUpdatedValues);
     handleTasksData(newUpdatedValues);
   }
   let newTasks;
 
-  console.log(arrayOfTasks, "tEST");
+  // console.log(arrayOfTasks, "tEST");
 
   function handleCreateTask() {
     newTasks = [...arrayOfTasks, inputValue];
@@ -50,7 +48,7 @@ function Tasks({ sendData }) {
     handleTasksData(newArray);
     console.log(newArray);
   }
-  console.log(projects);
+  // console.log(projects);
 
   return (
     <div>

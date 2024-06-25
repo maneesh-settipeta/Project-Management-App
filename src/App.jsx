@@ -10,13 +10,11 @@ import Home from "./Components/Home";
 import LoginPage from "./Components/LoginPage";
 
 function App() {
-  const { projects, isUserLoggedIn } = useContext(CreateContext);
-  console.log(projects);
-  console.log(isUserLoggedIn, "LoggedIn");
+  const { isUserLoggedIn } = useContext(CreateContext);
+
   return (
-    <ProjectContext>
-      <main className="h-screen flex flex-col">
-        {/* {isUserLoggedIn ? ( */}
+    <main className="h-screen flex flex-col">
+      {isUserLoggedIn ? (
         <>
           <div>
             <Header />
@@ -26,11 +24,10 @@ function App() {
             <SideBarRight />
           </div>
         </>
-        {/* // ) : (
-        //   <LoginPage />
-        // )} */}
-      </main>
-    </ProjectContext>
+      ) : (
+        <LoginPage />
+      )}
+    </main>
   );
 }
 
