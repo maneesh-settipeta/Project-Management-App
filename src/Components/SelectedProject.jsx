@@ -12,10 +12,10 @@ function SelectedProject() {
 
   return (
     <>
-      <div className="w-5/6 h-screen bg-slate-100">
+      <div className="w-5/6  bg-slate-100">
         <div className="flex justify-end ">
           <button
-            onClick={() => updateProjectState(projectSelect?.id)}
+            onClick={() => updateProjectState("delete", projectSelect?.id)}
             className="bg-sky-400 text-gray-950 py-2 px-2 text-md font-normal rounded-md mt-2  ml-2 mr-4"
           >
             Delete Project

@@ -5,10 +5,6 @@ export const CreateContext = createContext({
   projectStateStatus: 1,
   isUserLoggedIn: false,
   handleUserLoginPage: () => {},
-  handleDeleteProject: () => {},
-
-  handleOnSaveProjectID: () => {},
-
   handleTasksData: () => {},
   handleSaveData: () => {},
   updateProjectState: () => {},
@@ -36,25 +32,12 @@ export default function ProjectContext({ children }) {
     });
   }
 
-  function handleDeleteProject(id) {
-    setProjectState((prevState) => {
-      const updatedProjects = prevState.projects.filter(
-        (project) => project.id !== id
-      );
-      return {
-        ...prevState,
-        projects: updatedProjects,
-        projectStateStatus: undefined,
-      };
-    });
-  }
-
   function updateProjectState(status, id = null) {
-    console.log("coming");
+    console.log(status, id, "coming");
     setProjectState((prevState) => {
       let updatedProjects = prevState.projects;
       if (status === "delete" && id) {
-        console.log("if loop");
+        console.log(status, id, "if loop");
         updatedProjects = updatedProjects.filter(
           (project) => project.id !== id
         );
@@ -64,19 +47,6 @@ export default function ProjectContext({ children }) {
         ...prevState,
         projects: updatedProjects,
         projectStateStatus: status,
-      };
-      // return {
-      //   ...prevState,
-      //   projectStateStatus: status,
-      // };
-    });
-  }
-
-  function handleOnSaveProjectID(id) {
-    setProjectState((prevState) => {
-      return {
-        ...prevState,
-        projectStateStatus: id,
       };
     });
   }
@@ -129,15 +99,10 @@ export default function ProjectContext({ children }) {
   const projectsData = {
     ...projectState,
     handleUserLoginPage,
-    handleDeleteProject,
-
-    handleOnSaveProjectID,
-
     handleTasksData,
     handleSaveData,
     updateProjectState,
   };
-  // console.log(projectsData, "App.jsx");
 
   return (
     <CreateContext.Provider value={projectsData}>
