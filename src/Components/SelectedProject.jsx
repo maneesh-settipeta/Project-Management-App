@@ -2,13 +2,9 @@ import Tasks from "./Tasks";
 import { CreateContext } from "../Store/Store-Projects-Data";
 import { useContext } from "react";
 
-function SelectedProject({ deleteProject, onSendTasksData }) {
-  function handleDataFromTasks(tasksData) {
-    onSendTasksData(tasksData);
-  }
-  const { projectStateStatus, projects } = useContext(CreateContext);
-
-  // console.log(projectStateStatus, "Selected", projects);
+function SelectedProject() {
+  const { projectStateStatus, projects, updateProjectState } =
+    useContext(CreateContext);
 
   const projectSelect = projects.find(
     (project) => project.id === projectStateStatus
@@ -19,7 +15,7 @@ function SelectedProject({ deleteProject, onSendTasksData }) {
       <div className="w-5/6 h-screen bg-slate-100">
         <div className="flex justify-end ">
           <button
-            onClick={() => deleteProject(projectSelect?.id)}
+            onClick={() => updateProjectState(projectSelect?.id)}
             className="bg-sky-400 text-gray-950 py-2 px-2 text-md font-normal rounded-md mt-2  ml-2 mr-4"
           >
             Delete Project
@@ -58,7 +54,7 @@ function SelectedProject({ deleteProject, onSendTasksData }) {
 
         <hr></hr>
         <div>
-          <Tasks sendData={handleDataFromTasks} />
+          <Tasks />
         </div>
       </div>
     </>

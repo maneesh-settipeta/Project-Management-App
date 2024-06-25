@@ -2,8 +2,8 @@ import { useContext, useRef } from "react";
 import InputVariables from "./InputsVariables";
 import { CreateContext } from "../Store/Store-Projects-Data";
 
-function CreateProjects({ cancelButton, onSendData }) {
-  const { handleSaveData } = useContext(CreateContext);
+function CreateProjects() {
+  const { updateProjectState, handleSaveData } = useContext(CreateContext);
 
   const title = useRef();
   const description = useRef();
@@ -22,7 +22,7 @@ function CreateProjects({ cancelButton, onSendData }) {
     const requestedbyData = requestedby.current.value;
     const categoryData = category.current.value;
 
-    onSendData({
+    handleSaveData({
       title: titleData,
       description: descriptionData,
       dueDate: duedateData,
@@ -57,14 +57,14 @@ function CreateProjects({ cancelButton, onSendData }) {
       </div>
       <p className="flex  mt-5  mr-40 justify-end">
         <button
-          onClick={cancelButton}
+          onClick={() => updateProjectState(undefined)}
           className="bg-slate-50  text-gray-900 py-2 px-3 text-lg rounded-md mt-2 ml-4 border border-slate-500
           hover:bg-red-200 hover:border-none hover:font-medium hover:shadow-[0_4px_10px_rgba(0,0,0,0.25)] transition-all duration-300 ease-in-out"
         >
           Cancel
         </button>
         <button
-          onClick={handleSaveData}
+          onClick={onSaveButton}
           className="bg-[rgb(64,224,208)] text-gray-350 py-2 px-3 text-lg hover:font-medium rounded-md mt-2 ml-2 mr-12 hover:bg-[rgb(72,209,204)] hover:text-black hover:shadow-[0_4px_10px_rgba(0,0,0,0.25)] transition-all duration-300 ease-in-out"
         >
           Save

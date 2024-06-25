@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { CreateContext } from "../Store/Store-Projects-Data";
 
 function DefaultPage() {
-  const { handleRedirectCreateProjectFromSide } = useContext(CreateContext);
-  
+  const { updateProjectState } = useContext(CreateContext);
+
   return (
     <>
       <div className="w-5/6  bg-slate-100 flex flex-col items-center justify-center  ">
@@ -20,7 +20,7 @@ function DefaultPage() {
         </p>
         <p>
           <button
-            onClick={handleRedirectCreateProjectFromSide}
+            onClick={() => updateProjectState(null)}
             className="bg-[rgb(64,224,208)] text-gray-800 py-2 px-3 text-lg font-medium rounded-md mt-2 "
           >
             + Add Project

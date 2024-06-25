@@ -7,36 +7,27 @@ import SelectedProject from "./Components/SelectedProject";
 import CreateProjects from "./Components/CreateProjects";
 import DefaultPage from "./Components/DefaultPage";
 import Home from "./Components/Home";
+import LoginPage from "./Components/LoginPage";
 
 function App() {
-  const {
-    projects,
-    handleOnSaveProjectID,
-    handleRedirectCreateProjectFromSide,
-  } = useContext(CreateContext);
+  const { projects, isUserLoggedIn } = useContext(CreateContext);
   console.log(projects);
-
+  console.log(isUserLoggedIn, "LoggedIn");
   return (
     <ProjectContext>
-      
       <main className="h-screen flex flex-col">
-        {/* {projectState.isUserLoggedIn ? ( */}
+        {/* {isUserLoggedIn ? ( */}
         <>
           <div>
             <Header />
           </div>
           <div className="flex flex-grow">
-            
             <Home />
-            <SideBarRight
-              sendProjectsToSideBar={projects}
-              onSaveProjectID={handleOnSaveProjectID}
-              redirectCreateProject={handleRedirectCreateProjectFromSide}
-            />
+            <SideBarRight />
           </div>
         </>
         {/* ) : (
-          <LoginPage onSendUserData={handleUserLoginPage} />
+          <LoginPage />
         )} */}
       </main>
     </ProjectContext>

@@ -3,15 +3,15 @@ import { createContext } from "react";
 export const CreateContext = createContext({
   projects: [],
   projectStateStatus: 1,
+  isUserLoggedIn: false,
   handleUserLoginPage: () => {},
   handleDeleteProject: () => {},
-  handleReturnHomePage: () => {},
+
   handleOnSaveProjectID: () => {},
-  handleCancelButton: () => {},
-  handleDefaultPage: () => {},
-  handleRedirectCreateProjectFromSide: () => {},
+
   handleTasksData: () => {},
   handleSaveData: () => {},
+  updateProjectState: () => {},
 });
 
 export default function ProjectContext({ children }) {
@@ -49,14 +49,27 @@ export default function ProjectContext({ children }) {
     });
   }
 
-  function handleReturnHomePage() {
+  function updateProjectState(status, id = null) {
+    console.log("coming");
     setProjectState((prevState) => {
+      let updatedProjects = prevState.projects;
+      if (status === "delete" && id) {
+        console.log("if loop");
+        updatedProjects = updatedProjects.filter(
+          (project) => project.id !== id
+        );
+        status = undefined;
+      }
       return {
         ...prevState,
-        projectStateStatus: undefined,
+        projects: updatedProjects,
+        projectStateStatus: status,
       };
+      // return {
+      //   ...prevState,
+      //   projectStateStatus: status,
+      // };
     });
-    console.log("projects ",projectState);
   }
 
   function handleOnSaveProjectID(id) {
@@ -67,34 +80,6 @@ export default function ProjectContext({ children }) {
       };
     });
   }
-
-  function handleCancelButton() {
-    setProjectState((prevState) => {
-      return {
-        ...prevState,
-        projectStateStatus: undefined,
-      };
-    });
-  }
-
-  function handleDefaultPage() {
-    setProjectState((prevState) => {
-      return {
-        ...prevState,
-        projectStateStatus: undefined,
-      };
-    });
-    console.log("insd",projectState);
-  }
-
-  const handleRedirectCreateProjectFromSide = () => {
-    setProjectState((prevState) => {
-      return {
-        ...prevState,
-        projectStateStatus: null,
-      };
-    });
-  };
 
   function handleTasksData(tasksItems) {
     console.log(tasksItems, "AppRecieving");
@@ -145,13 +130,12 @@ export default function ProjectContext({ children }) {
     ...projectState,
     handleUserLoginPage,
     handleDeleteProject,
-    handleReturnHomePage,
+
     handleOnSaveProjectID,
-    handleCancelButton,
-    updateHandleDefaultPage: handleDefaultPage,
-    handleRedirectCreateProjectFromSide,
+
     handleTasksData,
     handleSaveData,
+    updateProjectState,
   };
   // console.log(projectsData, "App.jsx");
 

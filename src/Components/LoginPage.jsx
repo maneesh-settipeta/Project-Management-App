@@ -1,17 +1,21 @@
 import { useRef } from "react";
+import { useContext } from "react";
+import { CreateContext } from "../Store/Store-Projects-Data";
 
-function LoginPage({ onSendUserData }) {
+function LoginPage() {
+  const { handleUserLoginPage } = useContext(CreateContext);
+
   const userId = useRef(null);
   const userPassword = useRef(null);
 
   function handleUserLogin() {
     const username = userId.current.value;
     const userPass = userPassword.current.value;
-    if (username === "" && userPass === "") {
+    if (username === "" || userPass === "") {
       alert("Please Enter Login Credentials");
     }
 
-    onSendUserData(username, userPass);
+    handleUserLoginPage(username, userPass);
   }
 
   return (

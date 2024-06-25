@@ -7,7 +7,8 @@ function Tasks({ sendData }) {
   const [populateInput, setPopulateInput] = useState(null);
   const [updatedValues, setUpdateNewTask] = useState("");
 
-  const { projects, projectStateStatus } = useContext(CreateContext);
+  const { handleTasksData, projectStateStatus, projects } =
+    useContext(CreateContext);
 
   const selectedTasks = projects.find(
     (project) => project.id === projectStateStatus
@@ -28,7 +29,7 @@ function Tasks({ sendData }) {
     setPopulateInput(null);
     setUpdateNewTask("");
     console.log(newUpdatedValues);
-    sendData(newUpdatedValues);
+    handleTasksData(newUpdatedValues);
   }
   let newTasks;
 
@@ -38,7 +39,7 @@ function Tasks({ sendData }) {
     newTasks = [...arrayOfTasks, inputValue];
     setArrayTasks(newTasks);
     setInpuValue("");
-    sendData(newTasks);
+    handleTasksData(newTasks);
     console.log(newTasks, "taskssend");
   }
 
@@ -46,7 +47,7 @@ function Tasks({ sendData }) {
     const newArray = [...arrayOfTasks];
     newArray.splice(index, 1);
     setArrayTasks(newArray);
-    sendData(newArray);
+    handleTasksData(newArray);
     console.log(newArray);
   }
   console.log(projects);
