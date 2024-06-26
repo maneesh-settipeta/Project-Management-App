@@ -41,7 +41,7 @@ export default function ProjectContext({ children }) {
         return {
           ...prevState,
           projects: updatedProjects,
-          projectStateStatus: undefined,
+          projectStateStatus: "returnDashboard",
         };
       } else {
         return {
@@ -58,12 +58,12 @@ export default function ProjectContext({ children }) {
       const selectProject = prevState.projects.find(
         (project) => project.id === prevState.projectStateStatus
       );
-      console.log(selectedprojected, "-", prevState.projectStateStatus);
+      console.log(selectProject, "1");
 
       const projectIndex = prevState.projects.findIndex(
         (project) => project.id === selectProject.id
       );
-      console.log(projectIndex);
+      console.log(projectIndex, "2");
 
       const updatedProject = {
         ...prevState.projects[projectIndex],
@@ -94,17 +94,12 @@ export default function ProjectContext({ children }) {
       };
       return {
         ...prevState,
-        projectStateStatus: undefined,
         projects: [...prevState.projects, newProject],
         uniqueId: newId,
+        projectStateStatus: "returnDashboard",
       };
     });
   }
-
-  const selectedprojected = projectState.projects.find(
-    (project) => project.id === projectState.projectStateStatus
-  );
-  console.log(selectedprojected, "not updated");
 
   const projectsData = {
     ...projectState,

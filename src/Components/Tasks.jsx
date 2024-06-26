@@ -1,7 +1,7 @@
 import { useRef, useState, useContext } from "react";
 import { CreateContext } from "../Store/Store-Projects-Data";
 
-function Tasks({ sendData }) {
+function Tasks() {
   const [inputValue, setInpuValue] = useState("");
   const [arrayOfTasks, setArrayTasks] = useState([]);
   const [populateInput, setPopulateInput] = useState(null);
@@ -21,28 +21,26 @@ function Tasks({ sendData }) {
   }
 
   function updateInputElement(index) {
-    const newUpdatedValues = [...arrayOfTasks];
+    const newUpdatedValues = [...selectedTasks.tasks];
     newUpdatedValues[index] = updatedValues;
     setArrayTasks(newUpdatedValues);
     setPopulateInput(null);
     setUpdateNewTask("");
-    // console.log(newUpdatedValues);
+
     handleTasksData(newUpdatedValues);
   }
   let newTasks;
-
-  // console.log(arrayOfTasks, "tEST");
-
   function handleCreateTask() {
-    newTasks = [...arrayOfTasks, inputValue];
+    newTasks = [...(selectedTasks.tasks || []), inputValue];
     setArrayTasks(newTasks);
     setInpuValue("");
     handleTasksData(newTasks);
+
     console.log(newTasks, "taskssend");
   }
 
   function clearTask(index) {
-    const newArray = [...arrayOfTasks];
+    const newArray = [...selectedTasks.tasks];
     newArray.splice(index, 1);
     setArrayTasks(newArray);
     handleTasksData(newArray);
