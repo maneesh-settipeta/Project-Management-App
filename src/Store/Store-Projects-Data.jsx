@@ -26,10 +26,11 @@ function ProjectsStateUseReducer(state, action) {
   }
   if (action.type === "UPDATE-PROJECT") {
     if (action?.payload?.status === "delete" && action.payload.id) {
+      console.log(action?.payload?.status, action?.payload?.id);
       const updatedProjects = state.projects.filter(
-        (project) => project.id !== state.projectStateStatus
+        (project) => project.id !== action.payload.id
       );
-      console.log(action.payload.status, action.payload.id);
+
       return {
         ...state,
         projects: updatedProjects,

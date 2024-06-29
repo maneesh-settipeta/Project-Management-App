@@ -6,7 +6,7 @@ function SideBarRight({}) {
 
   return (
     <>
-      <aside className="bg-[rgb(64,224,208)] text-gray-900  py-4 w-1/6 border border-l-slate-400">
+      <aside className="bg-[rgb(64,224,208)] text-gray-900  py-4 w-1/6 border  border-l-slate-400 ">
         <div className="flex">
           <h1 className=" text-gray-800 p-4 font-serif text-2xl">Projects</h1>
           <button

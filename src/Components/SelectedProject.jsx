@@ -10,6 +10,15 @@ function SelectedProject() {
     (project) => project.id === projectStateStatus
   );
 
+  function deleteProjectCheckTasks(Delete, projectId) {
+    const checkProjectTasks = projects.find((p) => p.id === projectId);
+    if (checkProjectTasks.tasks && checkProjectTasks.tasks.length > 0) {
+      alert("Please Complete Tasks to clear project");
+    } else {
+      updateProjectState(Delete, projectId);
+    }
+  }
+
   return (
     <>
       <div className="w-5/6  bg-slate-100">
@@ -21,7 +30,7 @@ function SelectedProject() {
             Return Home
           </button>
           <button
-            onClick={() => updateProjectState("delete", projectSelect?.id)}
+            onClick={() => deleteProjectCheckTasks("delete", projectSelect?.id)}
             className="bg-sky-400 text-gray-950 py-2 px-2 text-md font-normal rounded-md mt-2  ml-2 mr-4"
           >
             Delete Project

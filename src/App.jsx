@@ -19,7 +19,7 @@ function App() {
           <div>
             <Header />
           </div>
-          <div className="flex flex-grow">
+          <div className="flex flex-grow ">
             <Home />
             <SideBarRight />
           </div>
