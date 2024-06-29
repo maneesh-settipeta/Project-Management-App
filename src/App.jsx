@@ -13,7 +13,7 @@ function App() {
   const { isUserLoggedIn } = useContext(CreateContext);
 
   return (
-    <main className="h-screen flex flex-col">
+    <main className="h-screen flex flex-col overflow-hidden">
       {isUserLoggedIn ? (
         <>
           <div>

@@ -18,19 +18,29 @@ function ProjectsDashboard() {
     <>
       <div className="w-5/6  bg-slate-100  overflow-y-auto h-screen">
         {projects.length === 0 ? (
-          <div className="flex flex-col w-5/6 items-center justify-center mt-64">
-            <div>
-              <p className="font-normal text-3xl ">No Projects </p>
+          <>
+            <div className="w-5/6  bg-slate-100 flex flex-col mt-60 items-center justify-center  ">
+              <h1 className="text-gray-800 py-2 px-1 font-Serif text-3xl">
+                Start Project
+              </h1>
+              <p className="text-gray-800 py-2 px-1 font-serif text-lg">
+                Please click{" "}
+                <span className="text-neutral-950 font-bold  font-mono">
+                  {" "}
+                  + Add Project button{" "}
+                </span>
+                to create a project for your team
+              </p>
               <p>
                 <button
                   onClick={() => updateProjectState(null)}
-                  className="bg-[rgb(64,224,208)] text-gray-800 py-2 px-3 ml-4 text-base font-medium rounded-md mt-2 "
+                  className="bg-[rgb(64,224,208)] text-gray-800 py-2 px-3 text-lg font-medium rounded-md mt-2 "
                 >
                   + Add Project
                 </button>
               </p>
             </div>
-          </div>
+          </>
         ) : (
           <>
             {" "}
@@ -49,7 +59,7 @@ function ProjectsDashboard() {
                   className="flex items-center "
                   onClick={() => updateProjectState(project.id)}
                 >
-                  <div className="bg-white p-3 h-64 w-52 ml-9  mr-0 mb-2 mt-2 hover:shadow-[0_4px_10px_rgba(0,0,0,0.25)] ">
+                  <div className="bg-white p-3 h-64 w-52 ml-9  mr-0 mb-2 mt-2 overflow-y-auto hover:shadow-[0_4px_10px_rgba(0,0,0,0.25)] ">
                     <div className="flex justify-between">
                       <h1 className="text-black text-base mb-3">
                         <span className="font-medium text-lg text-black">
