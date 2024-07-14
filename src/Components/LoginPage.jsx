@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useContext } from "react";
 import { CreateContext } from "../Store/Store-Projects-Data";
+import { NavLink } from "react-router-dom";
 
 function LoginPage() {
   const { handleUserLoginPage } = useContext(CreateContext);
@@ -46,6 +47,7 @@ function LoginPage() {
             <button
               className="bg-slate-200 p-2 text-gray-350 text-lg hover:font-medium rounded-md   hover:text-black hover:shadow-[0_4px_10px_rgba(0,0,0,0.25)] transition-all duration-300 ease-in-out"
               onClick={handleUserLogin}
+              to="/Login"
             >
               Login{" "}
             </button>

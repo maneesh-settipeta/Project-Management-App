@@ -1,6 +1,6 @@
 import Header from "./Components/Header";
 import SideBarRight from "./Components/SideBarRight";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CreateContext } from "./Store/Store-Projects-Data";
 import ProjectContext from "./Store/Store-Projects-Data";
 import SelectedProject from "./Components/SelectedProject";

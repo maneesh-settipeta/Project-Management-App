@@ -1,5 +1,8 @@
 import { useState, useReducer } from "react";
 import { createContext } from "react";
+import { db } from "../firebase.config";
+import { collection, addDoc } from "firebase/firestore";
+
 export const CreateContext = createContext({
   projects: [],
   projectStateStatus: 1,
@@ -10,16 +13,22 @@ export const CreateContext = createContext({
   updateProjectState: () => {},
 });
 
-function ProjectsStateUseReducer(state, action) {
+async function ProjectsStateUseReducer(state, action) {
   if (action.type === "ADD-PROJECT") {
     const newId = state.uniqueId + 1;
     const newProject = {
       ...action.projectDetails,
       id: newId,
     };
+    const data = await addDoc(collection(db, "projects"), newProject);
+
+    const projectWithId = {
+      ...newProject,
+      id: data.id,
+    };
     return {
       ...state,
-      projects: [...state.projects, newProject],
+      projects: [...state.projects, projectWithId],
       uniqueId: newId,
       projectStateStatus: "returnDashboard",
     };
@@ -37,10 +46,10 @@ function ProjectsStateUseReducer(state, action) {
         projectStateStatus: "returnDashboard",
       };
     } else {
-      console.log(action.pageChange);
+      console.log(action.status);
       return {
         ...state,
-        projectStateStatus: action.pageChange,
+        projectStateStatus: action.status,
       };
     }
   }
@@ -50,29 +59,24 @@ function ProjectsStateUseReducer(state, action) {
       isUserLoggedIn: action.isUserLoggedIn,
     };
   }
+
   if (action.type === "UPDATE-TASKS") {
-    const selectProject = state.projects.find(
+    const findProject = state.projects.findIndex(
       (project) => project.id === state.projectStateStatus
     );
-
-    const projectIndex = state.projects.findIndex(
-      (project) => project.id === selectProject.id
-    );
-
-    const updatedProject = {
-      ...state.projects[projectIndex],
+    console.log(findProject);
+    const updateTasksforproject = {
+      ...state.projects[findProject],
       tasks: action.taskitems,
     };
-
-    const finalUpdated = [
-      ...state.projects.slice(0, projectIndex),
-      updatedProject,
-      ...state.projects.slice(projectIndex + 1),
+    const updateFinalProject = [
+      ...state.projects.slice(0, findProject),
+      updateTasksforproject,
+      ...state.projects.slice(findProject + 1),
     ];
-
     return {
       ...state,
-      projects: finalUpdated,
+      projects: updateFinalProject,
     };
   } else {
     return {
@@ -91,10 +95,10 @@ export default function ProjectContext({ children }) {
     }
   );
 
-  function handleSaveData(projectDetails) {
+  async function handleSaveData(projectDetails) {
     setProjectsDispatch({
       type: "ADD-PROJECT",
-      projectDetails: projectDetails,
+      projectDetails: { ...projectDetails },
     });
   }
 
@@ -111,7 +115,7 @@ export default function ProjectContext({ children }) {
     } else {
       setProjectsDispatch({
         type: "UPDATE-PROJECT",
-        pageChange: status,
+        status: status,
       });
     }
   }
@@ -128,6 +132,7 @@ export default function ProjectContext({ children }) {
   }
 
   function handleTasksData(tasksItems) {
+    console.log(tasksItems, "sending");
     setProjectsDispatch({
       type: "UPDATE-TASKS",
       taskitems: tasksItems,
