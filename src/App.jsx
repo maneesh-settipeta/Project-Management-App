@@ -1,33 +1,30 @@
-import Header from "./Components/Header";
-import SideBarRight from "./Components/SideBarRight";
-import { useContext } from "react";
-import { CreateContext } from "./Store/Store-Projects-Data";
-import ProjectContext from "./Store/Store-Projects-Data";
-import SelectedProject from "./Components/SelectedProject";
 import CreateProjects from "./Components/CreateProjects";
-import DefaultPage from "./Components/DefaultPage";
-import Home from "./Components/Home";
 import LoginPage from "./Components/LoginPage";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import RoutingComponents from "./Components/RoutingComponents";
+import ProjectsDashboard from "./Components/ProjectsDashboard";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RoutingComponents />,
+    children: [
+      {
+        path: "auth",
+        element: <LoginPage />,
+      },
+      { path: "home", element: <ProjectsDashboard /> },
+      ,
+      { path: "create-project", element: <CreateProjects /> },
+    ],
+  },
+]);
 
 function App() {
-  const { isUserLoggedIn } = useContext(CreateContext);
-
   return (
-    <main className="h-screen flex flex-col overflow-hidden">
-      {isUserLoggedIn ? (
-        <>
-          <div>
-            <Header />
-          </div>
-          <div className="flex flex-grow ">
-            <Home />
-            <SideBarRight />
-          </div>
-        </>
-      ) : (
-        <LoginPage />
-      )}
-    </main>
+    <>
+      <RouterProvider router={router}></RouterProvider>
+    </>
   );
 }
 

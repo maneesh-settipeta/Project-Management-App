@@ -1,6 +1,6 @@
 import { CreateContext } from "../Store/Store-Projects-Data";
 import { useContext } from "react";
-
+import { NavLink } from "react-router-dom";
 function SideBarRight({}) {
   const { updateProjectState, projects } = useContext(CreateContext);
 
@@ -10,10 +10,11 @@ function SideBarRight({}) {
         <div className="flex">
           <h1 className=" text-gray-800 p-4 font-serif text-2xl">Projects</h1>
           <button
+            to="/create-project"
             onClick={() => updateProjectState(null)}
             className=" text-gray-800 py-2 px-3 text-sm font-semibold rounded-md hover:text-gray-950 mt- "
           >
-            + Add Project
+            <NavLink to="/create-project"> + Add Project</NavLink>
           </button>
         </div>
         <hr className="my-6 h-px bg-gray-500 border-0"></hr>

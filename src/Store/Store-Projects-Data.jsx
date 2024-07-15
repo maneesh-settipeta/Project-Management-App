@@ -13,14 +13,14 @@ export const CreateContext = createContext({
   updateProjectState: () => {},
 });
 
-async function ProjectsStateUseReducer(state, action) {
+function ProjectsStateUseReducer(state, action) {
   if (action.type === "ADD-PROJECT") {
     const newId = state.uniqueId + 1;
     const newProject = {
       ...action.projectDetails,
       id: newId,
     };
-    const data = await addDoc(collection(db, "projects"), newProject);
+    const data = addDoc(collection(db, "projects"), newProject);
 
     const projectWithId = {
       ...newProject,
@@ -95,7 +95,7 @@ export default function ProjectContext({ children }) {
     }
   );
 
-  async function handleSaveData(projectDetails) {
+  function handleSaveData(projectDetails) {
     setProjectsDispatch({
       type: "ADD-PROJECT",
       projectDetails: { ...projectDetails },
@@ -129,6 +129,7 @@ export default function ProjectContext({ children }) {
       type: "USER-LOGIN",
       isUserLoggedIn: UserLoggedIn,
     });
+    console.log(UserLoggedIn);
   }
 
   function handleTasksData(tasksItems) {

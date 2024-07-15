@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { CreateContext } from "../Store/Store-Projects-Data";
-
+import { NavLink } from "react-router-dom";
 function ProjectsDashboard() {
   const { projects, updateProjectState } = useContext(CreateContext);
 
@@ -32,12 +32,13 @@ function ProjectsDashboard() {
                 to create a project for your team
               </p>
               <p>
-                <button
+                <NavLink
+                  to="/create-project"
                   onClick={() => updateProjectState(null)}
                   className="bg-[rgb(64,224,208)] text-gray-800 py-2 px-3 text-lg font-medium rounded-md mt-2 "
                 >
                   + Add Project
-                </button>
+                </NavLink>
               </p>
             </div>
           </>
@@ -45,12 +46,13 @@ function ProjectsDashboard() {
           <>
             {" "}
             <div className="flex justify-end p-4">
-              <button
+              <NavLink
+                to="/create-project"
                 onClick={() => updateProjectState(null)}
                 className="bg-[rgb(64,224,208)] text-gray-800 py-2 px-3 text-lg font-medium rounded-md"
               >
                 + Add Project
-              </button>
+              </NavLink>
             </div>
             <div className="flex flex-wrap">
               {projects?.map((project) => (

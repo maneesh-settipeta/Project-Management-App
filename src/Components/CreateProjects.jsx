@@ -1,6 +1,7 @@
 import { useContext, useRef } from "react";
 import InputVariables from "./InputsVariables";
 import { CreateContext } from "../Store/Store-Projects-Data";
+import { NavLink } from "react-router-dom";
 
 function CreateProjects() {
   const { updateProjectState, handleSaveData } = useContext(CreateContext);
@@ -61,13 +62,13 @@ function CreateProjects() {
           className="bg-slate-50  text-gray-900 py-2 px-3 text-lg rounded-md mt-2 ml-4 border border-slate-500
           hover:bg-red-200 hover:border-none hover:font-medium hover:shadow-[0_4px_10px_rgba(0,0,0,0.25)] transition-all duration-300 ease-in-out"
         >
-          Cancel
+          <NavLink to="/"> Cancel </NavLink>
         </button>
         <button
           onClick={onSaveButton}
           className="bg-[rgb(64,224,208)] text-gray-350 py-2 px-3 text-lg hover:font-medium rounded-md mt-2 ml-2 mr-12 hover:bg-[rgb(72,209,204)] hover:text-black hover:shadow-[0_4px_10px_rgba(0,0,0,0.25)] transition-all duration-300 ease-in-out"
         >
-          Save
+          <NavLink to="/">Save</NavLink>
         </button>
       </p>
     </div>
